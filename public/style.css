@@ -1,0 +1,674 @@
+/* ==========================================================================
+   NEXTFARM — SISTEMA DE GESTÃO FARMACÊUTICA
+   Tema: Clean Medical — Verde profissional com acentos precisos
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+    --verde-1: #f0f7f0;
+    --verde-2: #c8e6c9;
+    --verde-3: #81c784;
+    --verde-4: #2e7d32;
+    --verde-5: #1b5e20;
+    --verde-6: #0d3b11;
+
+    --sidebar-bg: #111a13;
+    --sidebar-surface: rgba(255,255,255,0.04);
+    --sidebar-border: rgba(129,199,132,0.12);
+
+    --bg-page: #f4f6f4;
+    --bg-card: #ffffff;
+    --bg-glass: rgba(255,255,255,0.94);
+
+    --texto: #1a2a1a;
+    --texto-2: #4a6349;
+    --texto-3: #8aa68a;
+    --borda: #e2ebe2;
+    --erro: #c62828;
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+
+    --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+
+    --fonte: 'DM Sans', 'Segoe UI', sans-serif;
+    --fonte-mono: 'DM Mono', monospace;
+}
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: var(--fonte);
+    color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background:
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+        url('background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+body.dashboard-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: url('background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+}content 
+
+/* ==========================================================================
+   LOGIN
+   ========================================================================== */
+.container_login {
+    background: var(--bg-glass);
+    padding: 3rem 2.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.6) inset;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    backdrop-filter: blur(16px);
+    animation: fadeUp 0.5s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.container_login h1 {
+    color: var(--verde-4);
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.4rem;
+}
+
+.container_login h1::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    background: var(--verde-3);
+    border-radius: 99px;
+    margin: 10px auto 1.8rem;
+}
+
+.campo {
+    text-align: left;
+    margin-bottom: 1.1rem;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--texto-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--borda);
+    border-radius: var(--radius-sm);
+    outline: none;
+    font-size: 14px;
+    font-family: var(--fonte);
+    background: #fff;
+    color: var(--texto);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+    border-color: var(--verde-4);
+    box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
+}
+
+button[type="submit"], .btn-confirm {
+    width: 100%;
+    padding: 13px;
+    background: var(--verde-4);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--fonte);
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 8px;
+}
+
+button[type="submit"]:hover, .btn-confirm:hover {
+    background: var(--verde-5);
+}
+
+button[type="submit"]:active, .btn-confirm:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   LAYOUT DO DASHBOARD
+   ========================================================================== */
+.layout-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 255px;
+    background: var(--sidebar-bg);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 18px;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+    border-right: 1px solid var(--sidebar-border);
+    overflow-y: auto;
+}
+
+.logo-area {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--sidebar-border);
+}
+
+.logo-area h2 {
+    color: var(--verde-3);
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.logo-area span {
+    display: block;
+    font-size: 11px;
+    color: var(--texto-3);
+    margin-top: 5px;
+    font-family: var(--fonte-mono);
+}
+
+.menu p {
+    font-size: 10px;
+    color: var(--texto-3);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+}
+
+.btn-menu {
+    width: 100%;
+    padding: 11px 14px;
+    margin-bottom: 4px;
+    background: var(--sidebar-surface);
+    border: 1px solid transparent;
+    color: rgba(255,255,255,0.75);
+    text-align: left;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    font-family: var(--fonte);
+    font-weight: 400;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-menu:hover {
+    background: var(--verde-4);
+    color: white;
+    border-color: var(--verde-4);
+}
+
+/* CONTEÚDO */
+.content {
+    margin-left: 255px;
+    width: calc(100% - 255px);
+    padding: 32px 36px;
+    min-height: 100vh;
+    background: transparent;
+}
+
+.top-bar {
+    background: var(--bg-card);
+    padding: 18px 26px;
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--borda);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--texto);
+    letter-spacing: -0.3px;
+}
+
+/* CARDS */
+.card-grafico, .card-mestre {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--borda);
+    min-height: 300px;
+    transition: box-shadow 0.2s;
+}
+
+.card-grafico:hover, .card-mestre:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card-grafico h3, .card-mestre h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-2);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.card-grafico {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+canvas {
+    max-width: 100% !important;
+    max-height: 280px !important;
+}
+
+/* ==========================================================================
+   MODAIS
+   ========================================================================== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 10, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-content {
+    background: white;
+    width: 460px;
+    padding: 36px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--borda);
+    animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(12px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--texto);
+    margin-bottom: 6px;
+}
+
+.modal-content h3::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--verde-4);
+    border-radius: 99px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+.modal-large {
+    width: 80% !important;
+    max-width: 900px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.modal-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.modal-header h3::after { display: none; }
+
+.botoes-modal {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    background: #f1f3f1;
+    border: 1px solid var(--borda);
+    padding: 11px 16px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    flex: 1;
+    font-weight: 500;
+    font-family: var(--fonte);
+    font-size: 13px;
+    color: var(--texto-2);
+    transition: background 0.15s;
+}
+
+.btn-cancel:hover {
+    background: #e8ece8;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--texto-3);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+}
+
+.btn-close:hover {
+    background: #f1f3f1;
+    color: var(--erro);
+}
+
+/* ==========================================================================
+   TABELAS
+   ========================================================================== */
+.tabela-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--borda);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--texto);
+    font-size: 13px;
+}
+
+table th {
+    background: var(--verde-4);
+    color: white;
+    padding: 11px 14px;
+    position: sticky;
+    top: 0;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    text-align: left;
+}
+
+table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--borda);
+    text-align: left;
+    color: var(--texto-2);
+}
+
+table tr:last-child td { border-bottom: none; }
+
+table tr:hover td {
+    background: var(--verde-1);
+}
+
+/* ==========================================================================
+   FILTROS E BOTÕES PEQUENOS
+   ========================================================================== */
+.filtros-grafico {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.filtros-grafico p {
+    font-size: 10px;
+    color: var(--texto-3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.filtros-grafico .botoes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.btn-small {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.65);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 6px 14px;
+    font-size: 10px;
+    font-family: var(--fonte);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.18s;
+}
+
+.btn-small:hover {
+    background: var(--verde-4);
+    color: white;
+    border-color: var(--verde-4);
+}
+
+/* ==========================================================================
+   BOTÃO SAIR
+   ========================================================================== */
+.btn-sair {
+    margin-top: auto;
+    text-decoration: none;
+    background: transparent;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 11px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--fonte);
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.2s;
+}
+
+.btn-sair:hover {
+    background: rgba(198,40,40,0.15);
+    color: #ef9a9a;
+    border-color: rgba(198,40,40,0.3);
+}
+
+/* ==========================================================================
+   BOTÃO EXPORTAR PDF
+   ========================================================================== */
+.btn-exportar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    padding: 10px 14px;
+    background: transparent;
+    border: 1px solid rgba(129,199,132,0.35);
+    border-radius: var(--radius-sm);
+    color: var(--verde-3);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--fonte);
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 4px;
+}
+
+.btn-exportar:hover {
+    background: var(--verde-4);
+    border-color: var(--verde-4);
+    color: white;
+}
+
+.btn-exportar:active {
+    transform: scale(0.97);
+}
+
+/* ==========================================================================
+   CAMPOS ADMIN
+   ========================================================================== */
+.campo-admin {
+    margin-bottom: 18px;
+}
+
+.campo-admin label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 7px;
+}
+
+/* ==========================================================================
+   SCROLLBAR
+   ========================================================================== */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--verde-2); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--verde-3); }
+
+
+/* Fundo escuro do modal */
+.modal-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px);
+}
+
+/* Caixa branca do modal */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-body { padding: 20px; }
+
+.input-group { margin-bottom: 15px; }
+.input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn-save {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.close-btn { cursor: pointer; font-size: 24px; color: #aaa; }
+.close-btn:hover { color: #000; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
